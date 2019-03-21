@@ -1,5 +1,5 @@
 export default {
-    name: 'helloWorldComponent',
+    name: 'helloWorld',
     options: {
         template: require('./hello-world.html')
     }
