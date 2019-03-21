@@ -2,7 +2,7 @@
 
 Ce projet est un démo d'une application AngularJS 1.7 moderne avec les components, ECMAScript 2015 (6) et son concept de modules, et webpack.
 
-Il s'inspire des conventions et techniques détaillées dans [Using AngularJS with ES6 and Webpack](http://angular-tips.com/blog/2015/06/using-angular-1-dot-x-with-es6-and-webpack/).
+Il s'inspire des conventions et techniques détaillées dans [Using AngularJS with ES6 and Webpack](http://angular-tips.com/blog/2015/06/using-angular-1-dot-x-with-es6-and-webpack/) et [Webpack Frontend Starterkit](https://github.com/wbkd/webpack-starter).
 
 * [Démo AngularJS 1.7 avec components, ECMAScript 2015 and webpack](#démo-angularjs-17-avec-components-ecmascript-2015-and-webpack)
   * [Utilisation de modules ECMAScript 2015](#utilisation-de-modules-ecmascript-2015)

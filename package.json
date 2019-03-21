@@ -4,7 +4,8 @@
   "description": "Application AngularJS 1.7 avec les components, ES6 et webpack",
   "private": true,
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "start": "webpack-dev-server --open"
   },
   "repository": {
     "type": "git",
