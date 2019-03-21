@@ -1,6 +1,8 @@
 import angular from 'angular';
-import helloWorldComponent from './hello-world.component';
+import helloWorldModule from './hello-world/hello-world.module';
 
-angular
-    .module('app', [])
-    .component(helloWorldComponent.name, helloWorldComponent.options);
+export default angular
+    .module('app', [
+        helloWorldModule
+    ])
+    .name;
