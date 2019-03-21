@@ -1,8 +1,15 @@
-# Démo AngularJS 1.7 avec components, ES 2015 and webpack
+# Démo AngularJS 1.7 avec components, ECMAScript 2015 and webpack
 
 Ce projet est un démo d'une application AngularJS 1.7 moderne avec les components, ECMAScript 2015 (6) et son concept de modules, et webpack.
 
 Il s'inspire des conventions et techniques détaillées dans [Using AngularJS with ES6 and Webpack](http://angular-tips.com/blog/2015/06/using-angular-1-dot-x-with-es6-and-webpack/).
+
+* [Démo AngularJS 1.7 avec components, ECMAScript 2015 and webpack](#démo-angularjs-17-avec-components-ecmascript-2015-and-webpack)
+  * [Utilisation de modules ECMAScript 2015](#utilisation-de-modules-ecmascript-2015)
+    * [Déclaration d'un module](#déclaration-dun-module)
+    * [Enregistrement des composantes dans la déclaration du module](#enregistrement-des-composantes-dans-la-déclaration-du-module)
+    * [Déclaration d'un component](#déclaration-dun-component)
+      * [`import` ou `require`](#import-ou-require)
 
 ## Utilisation de modules ECMAScript 2015
 
@@ -146,6 +153,8 @@ export default {
 
 Un component AngularJS est défini par un objet qui représente ses options. Un module ES2015 pour un component exportera donc cet objet ainsi que le nom sous lequel il doit être enregistré. Ses propriétés `name` et `options` correspondent aux arguments de la fonction `component` d'AngularJS.
 
+**À noter**: le template HTML est importé avec la fonction Node.js `require` et **insérée dans le code JavaScript**. Aucun appel HTTP ne sera requis pour récupérer le template, il n'est donc pas nécessaire de l'empaqueter dans le bundle final.
+
 Ce component pourra ensuite être importé comme suit:
 
 ```javascript
@@ -159,3 +168,21 @@ angular
     .module('app.helloWorld')
     .component(helloWorldComponent.name, helloWorld.options)
 ```
+
+#### `import` ou `require`
+
+`import` est une instruction ECMAScript 2015; `require` est une instruction Node.js. (**webpack** est un outil programmé en Node.js, et peut donc interpréter les instructions Node.js.)
+
+* `import` peut être utilisé dans le navigateur pour importer un module. C'est `import` que nous devrions toujours utiliser dans notre logique JavaScript.
+* `require` est utilisé pour récupérer le contenu d'un template HTML pour l'insérer dans le code JavaScript. webpack va transpiler le code JavaScript pour inclure le contenu dans le component. C'est fonctionnellement équivalent à `template: '<h2>Hello, World!</h2>'` mais c'est plus pratique de coder du HTML dans un fichier à part. On aurait pu utiliser une fonction de lecture de fichier du module `fs` de Node.js, mais `require` est beaucoup plus concis.
+
+**Attention**: Visual Studio Code affiche une erreur TypeScript 2307 (module introuvable) avec une instruction `require('./chemin/ver/fichier.html')`. C'est que `require` est conçu pour importer des modules JavaScript, pas d'autres types de contenu. Pourtant, le code fonctionne.
+
+On peut éviter ces erreurs en créant un [fichier de déclarations TypeScript](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html) qui déclare un module pour les fichiers HTML:
+
+```typescript
+// html.d.ts
+declare module '*.html';
+```
+
+Pour référence, voir [Importing files other than TS modules](https://github.com/Microsoft/TypeScript/issues/2709#issuecomment-230183652).
